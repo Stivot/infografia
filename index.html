@@ -3,18 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fibonacci: Iterativo vs Recursivo</title>
+    <title>Infografía - Sistema de Traducción de Lengua de Señas</title>
     <style>
         :root {
             --primary: #2c3e50;
             --secondary: #3498db;
             --accent: #e74c3c;
             --light: #ecf0f1;
-            --dark: #2c3e50;
+            --dark: #1a252f;
             --success: #2ecc71;
-            --warning: #f39c12;
-            --iterative: #3498db;
-            --recursive: #e74c3c;
         }
         
         * {
@@ -25,471 +22,625 @@
         }
         
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
+            background: linear-gradient(135deg, #1a2a3a, #2c3e50);
+            color: var(--light);
             line-height: 1.6;
             padding: 20px;
-            min-height: 100vh;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
         }
         
         header {
-            background: var(--primary);
-            color: white;
-            padding: 30px;
             text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
         }
         
         h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
+            color: var(--light);
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
         
         .subtitle {
             font-size: 1.2rem;
-            opacity: 0.9;
+            color: var(--secondary);
+            margin-bottom: 20px;
         }
         
-        .intro {
-            padding: 30px;
-            background: var(--light);
-            line-height: 1.8;
+        .project-info {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 20px;
         }
         
-        .intro p {
-            margin-bottom: 15px;
+        .info-item {
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            text-align: center;
         }
         
-        .comparison {
+        .info-item i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+        
+        .grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
-            padding: 30px;
-        }
-        
-        @media (max-width: 768px) {
-            .comparison {
-                grid-template-columns: 1fr;
-            }
+            margin-bottom: 30px;
         }
         
         .card {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
         
         .card:hover {
             transform: translateY(-5px);
         }
         
-        .card-header {
-            padding: 20px;
-            color: white;
-            text-align: center;
-            font-size: 1.5rem;
-        }
-        
-        .iterative .card-header {
-            background: var(--iterative);
-        }
-        
-        .recursive .card-header {
-            background: var(--recursive);
-        }
-        
-        .card-content {
-            padding: 20px;
-        }
-        
-        .code-container {
-            background: #f8f9fa;
-            border-radius: 5px;
-            padding: 15px;
-            margin: 15px 0;
-            font-family: 'Courier New', monospace;
-            overflow-x: auto;
-        }
-        
-        .input-section {
-            display: flex;
-            gap: 10px;
-            margin: 20px 0;
-        }
-        
-        input {
-            flex: 1;
-            padding: 10px 15px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-        
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            background: var(--primary);
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-        
-        button:hover {
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
             background: var(--secondary);
         }
         
-        .result {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 5px;
-            background: #f8f9fa;
-        }
-        
-        .performance {
-            background: var(--light);
-            padding: 30px;
-            margin-top: 20px;
-            border-radius: 10px;
-        }
-        
-        .chart-container {
-            height: 300px;
-            margin-top: 20px;
+        .card h3 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
             display: flex;
-            align-items: flex-end;
-            gap: 30px;
+            align-items: center;
+        }
+        
+        .card h3 i {
+            margin-right: 10px;
+        }
+        
+        .card-content {
+            padding-left: 10px;
+        }
+        
+        .phase {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .phase:last-child {
+            border-bottom: none;
+        }
+        
+        .phase-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .phase-number {
+            background: var(--secondary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        
+        .stat {
+            text-align: center;
             padding: 20px;
-            background: white;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            flex: 1;
+            min-width: 150px;
         }
         
-        .bar {
-            width: 100px;
-            border-radius: 5px 5px 0 0;
-            position: relative;
-            transition: height 1s ease;
-        }
-        
-        .bar-iterative {
-            background: var(--iterative);
-        }
-        
-        .bar-recursive {
-            background: var(--recursive);
-        }
-        
-        .bar-label {
-            position: absolute;
-            bottom: -30px;
-            left: 0;
-            right: 0;
-            text-align: center;
+        .stat-value {
+            font-size: 2.5rem;
             font-weight: bold;
+            color: var(--success);
+            margin-bottom: 10px;
         }
         
-        .bar-value {
-            position: absolute;
-            top: -25px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-weight: bold;
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--light);
         }
         
-        .conclusion {
-            padding: 30px;
-            background: var(--light);
+        .team {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
             margin-top: 20px;
-            border-radius: 10px;
         }
         
-        .callout {
-            background: white;
-            padding: 20px;
-            border-left: 5px solid var(--success);
-            margin: 20px 0;
+        .member {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            width: 180px;
+        }
+        
+        .member-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .member-role {
+            font-size: 0.9rem;
+            color: var(--secondary);
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 5px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: var(--success);
+            border-radius: 5px;
+        }
+        
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .tech-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .binary-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.05;
+        }
+        
+        .binary-code {
+            position: absolute;
+            color: var(--light);
+            font-family: monospace;
+            font-size: 14px;
+            animation: fall linear infinite;
+        }
+        
+        @keyframes fall {
+            from { transform: translateY(-100px); }
+            to { transform: translateY(100vh); }
         }
         
         footer {
             text-align: center;
+            margin-top: 50px;
             padding: 20px;
-            background: var(--primary);
-            color: white;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .importance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .importance-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .importance-item:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .importance-item i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+        
+        .importance-item h4 {
+            color: var(--light);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .language-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .language-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid var(--accent);
+        }
+        
+        .language-card h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .language-card h3 i {
+            margin-right: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-info {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .language-info {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <div class="binary-bg" id="binaryBg"></div>
+    
     <div class="container">
         <header>
-            <h1>Serie de Fibonacci</h1>
-            <p class="subtitle">Implementación Iterativa vs Recursiva</p>
+            <h1>Sistema Inteligente de Traducción de Lengua de Señas</h1>
+            <p class="subtitle">Proyecto Final Sprint 3 - Grupo Woody</p>
+            
+            <div class="project-info">
+                <div class="info-item">
+                    <i class="fas fa-university"></i>
+                    <h3>Universidad Continental</h3>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>Construcción de Software</h3>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>2025 - 20</h3>
+                </div>
+            </div>
         </header>
         
-        <div class="intro">
-            <p>La serie de Fibonacci es una sucesión de números descrita por primera vez en Europa en el siglo XII por Leonardo de Pisa, también conocido como Fibonacci.</p>
-            <p>Cada número en la secuencia es la suma de los dos anteriores: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ...</p>
-            <p>Matemáticamente, se define como: F(0) = 0, F(1) = 1, F(n) = F(n-1) + F(n-2) para n > 1.</p>
-        </div>
-        
-        <div class="comparison">
-            <div class="card iterative">
-                <div class="card-header">
-                    Implementación Iterativa
-                </div>
+        <section class="grid">
+            <div class="card">
+                <h3><i class="fas fa-bullseye"></i> Objetivo del Proyecto</h3>
                 <div class="card-content">
-                    <p>El enfoque iterativo calcula la serie mediante un bucle, almacenando los valores previos.</p>
-                    <div class="code-container">
-                        <pre>function fibonacciIterativo(n) {
-    if (n <= 1) return n;
-    
-    let a = 0, b = 1, temp;
-    for (let i = 2; i <= n; i++) {
-        temp = a + b;
-        a = b;
-        b = temp;
-    }
-    return b;
-}</pre>
-                    </div>
-                    <div class="input-section">
-                        <input type="number" id="iterative-input" min="0" max="50" value="10" placeholder="Ingrese un número">
-                        <button onclick="calculateIterative()">Calcular</button>
-                    </div>
-                    <div class="result" id="iterative-result">
-                        Resultado aparecerá aquí
-                    </div>
+                    <p>Diseñar e implementar un sistema inteligente de traducción de lengua de señas peruana (LSP) en tiempo real para promover la inclusión social y mejorar la comunicación de personas con discapacidad del habla y auditiva.</p>
                 </div>
             </div>
             
-            <div class="card recursive">
-                <div class="card-header">
-                    Implementación Recursiva
-                </div>
+            <div class="card">
+                <h3><i class="fas fa-language"></i> ¿Qué es la Lengua de Señas?</h3>
                 <div class="card-content">
-                    <p>El enfoque recursivo calcula la serie llamándose a sí mismo con valores menores.</p>
-                    <div class="code-container">
-                        <pre>function fibonacciRecursivo(n) {
-    if (n <= 1) return n;
-    return fibonacciRecursivo(n - 1) + 
-           fibonacciRecursivo(n - 2);
-}</pre>
-                    </div>
-                    <div class="input-section">
-                        <input type="number" id="recursive-input" min="0" max="40" value="10" placeholder="Ingrese un número">
-                        <button onclick="calculateRecursive()">Calcular</button>
-                    </div>
-                    <div class="result" id="recursive-result">
-                        Resultado aparecerá aquí
-                    </div>
+                    <p>La lengua de señas es un sistema lingüístico completo y natural que utiliza gestos, expresiones faciales y movimientos corporales para transmitir significado. No es universal - cada país tiene su propia lengua de señas con gramática y vocabulario únicos.</p>
                 </div>
             </div>
-        </div>
+        </section>
         
-        <div class="performance">
-            <h2>Comparación de Rendimiento</h2>
-            <p>Prueba ambos métodos con el mismo valor y compara su tiempo de ejecución.</p>
-            
-            <div class="input-section">
-                <input type="number" id="compare-input" min="0" max="40" value="30" placeholder="Ingrese un número para comparar">
-                <button onclick="comparePerformance()">Comparar Rendimiento</button>
+        <section class="language-info">
+            <div class="language-card">
+                <h3><i class="fas fa-hands"></i> Lengua de Señas Peruana (LSP)</h3>
+                <p>La LSP es la lengua natural de la comunidad sorda peruana, reconocida oficialmente en el Perú. Cuenta con su propia estructura gramatical, sintaxis y vocabulario, diferente del español hablado.</p>
             </div>
             
-            <div class="chart-container" id="chart">
-                <div class="bar bar-iterative" style="height: 0px;">
-                    <div class="bar-value">0ms</div>
-                    <div class="bar-label">Iterativo</div>
-                </div>
-                <div class="bar bar-recursive" style="height: 0px;">
-                    <div class="bar-value">0ms</div>
-                    <div class="bar-label">Recursivo</div>
-                </div>
+            <div class="language-card">
+                <h3><i class="fas fa-globe-americas"></i> ASL vs LSP</h3>
+                <p>El ASL (American Sign Language) y LSP son lenguas diferentes. Nuestro proyecto se enfoca inicialmente en ASL por disponibilidad de datasets, con miras a adaptarlo posteriormente a LSP.</p>
             </div>
-            
-            <div id="performance-result"></div>
-        </div>
+        </section>
         
-        <div class="conclusion">
-            <h2>Análisis de Eficiencia</h2>
-            
-            <div class="callout">
-                <h3>Complejidad Algorítmica</h3>
-                <p><strong>Iterativo:</strong> O(n) - Tiempo lineal, memoria constante</p>
-                <p><strong>Recursivo:</strong> O(2^n) - Tiempo exponencial, memoria O(n) por la pila de llamadas</p>
+        <section class="card">
+            <h3><i class="fas fa-heart"></i> Importancia del Traductor de Señas</h3>
+            <div class="importance-grid">
+                <div class="importance-item">
+                    <i class="fas fa-universal-access"></i>
+                    <h4>Inclusión Social</h4>
+                    <p>Rompe barreras de comunicación permitiendo participación plena en la sociedad</p>
+                </div>
+                
+                <div class="importance-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h4>Educación Accesible</h4>
+                    <p>Facilita el acceso a la educación para estudiantes con discapacidad auditiva</p>
+                </div>
+                
+                <div class="importance-item">
+                    <i class="fas fa-briefcase"></i>
+                    <h4>Oportunidades Laborales</h4>
+                    <p>Amplía posibilidades de empleo al eliminar barreras de comunicación</p>
+                </div>
+                
+                <div class="importance-item">
+                    <i class="fas fa-user-friends"></i>
+                    <h4>Independencia Personal</h4>
+                    <p>Empodera para comunicarse sin depender constantemente de intérpretes</p>
+                </div>
+                
+                <div class="importance-item">
+                    <i class="fas fa-comments"></i>
+                    <h4>Comunicación Universal</h4>
+                    <p>Permite comunicación entre personas sordas y oyentes sin conocimientos previos</p>
+                </div>
+                
+                <div class="importance-item">
+                    <i class="fas fa-hands-helping"></i>
+                    <h4>Atención al Cliente</h4>
+                    <p>Mejora la atención en servicios públicos y privados para personas sordas</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="stats">
+            <div class="stat">
+                <div class="stat-value">466M</div>
+                <div class="stat-label">Personas con pérdida auditiva en el mundo</div>
             </div>
             
-            <p>La implementación iterativa es significativamente más eficiente para valores grandes de n, ya que evita la repetición de cálculos y el crecimiento exponencial de operaciones.</p>
-            <p>La implementación recursiva, aunque más elegante y fácil de entender, es computacionalmente costosa debido a la repetición de cálculos de los mismos valores muchas veces.</p>
-            
-            <div class="callout">
-                <h3>¿Cuándo usar cada enfoque?</h3>
-                <p><strong>Iterativo:</strong> Valores grandes de n, aplicaciones de rendimiento crítico</p>
-                <p><strong>Recursivo:</strong> Valores pequeños de n, claridad de código, propósitos educativos</p>
+            <div class="stat">
+                <div class="stat-value">99.83%</div>
+                <div class="stat-label">Precisión de nuestro modelo</div>
             </div>
-        </div>
+            
+            <div class="stat">
+                <div class="stat-value">312K</div>
+                <div class="stat-label">Imágenes en Dataset</div>
+            </div>
+            
+            <div class="stat">
+                <div class="stat-value">29</div>
+                <div class="stat-label">Señas Reconocidas</div>
+            </div>
+        </section>
+        
+        <section class="grid">
+            <div class="card">
+                <h3><i class="fas fa-chart-line"></i> Metodología CRISP-ML</h3>
+                <div class="card-content">
+                    <div class="phase">
+                        <div class="phase-title">
+                            <div class="phase-number">1</div>
+                            <h4>Comprensión del Negocio</h4>
+                        </div>
+                        <p>Definición del problema de comunicación para personas con discapacidad auditiva.</p>
+                    </div>
+                    
+                    <div class="phase">
+                        <div class="phase-title">
+                            <div class="phase-number">2</div>
+                            <h4>Comprensión de los Datos</h4>
+                        </div>
+                        <p>Dataset de 312,000 imágenes, 28x28 píxeles, escala de grises, 29 clases.</p>
+                    </div>
+                    
+                    <div class="phase">
+                        <div class="phase-title">
+                            <div class="phase-number">3</div>
+                            <h4>Preparación de Datos</h4>
+                        </div>
+                        <p>Preprocesamiento, aumento de datos y división estratégica de conjuntos.</p>
+                    </div>
+                    
+                    <div class="phase">
+                        <div class="phase-title">
+                            <div class="phase-number">4</div>
+                            <h4>Modelado</h4>
+                        </div>
+                        <p>Arquitectura ResNet50 pre-entrenada con capas personalizadas para clasificación.</p>
+                    </div>
+                    
+                    <div class="phase">
+                        <div class="phase-title">
+                            <div class="phase-number">5</div>
+                            <h4>Evaluación</h4>
+                        </div>
+                        <p>Precisión del 99.83% con 600 muestras de prueba. Matriz de confusión generada.</p>
+                    </div>
+                    
+                    <div class="phase">
+                        <div class="phase-title">
+                            <div class="phase-number">6</div>
+                            <h4>Despliegue</h4>
+                        </div>
+                        <p>Aplicación móvil para reconocimiento en tiempo real con conversión a texto/voz.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3><i class="fas fa-cogs"></i> Tecnologías Utilizadas</h3>
+                <div class="tech-stack">
+                    <div class="tech-item">Python</div>
+                    <div class="tech-item">TensorFlow/Keras</div>
+                    <div class="tech-item">ResNet50</div>
+                    <div class="tech-item">Computer Vision</div>
+                    <div class="tech-item">Deep Learning</div>
+                    <div class="tech-item">Mobile Development</div>
+                    <div class="tech-item">Kaggle Datasets</div>
+                </div>
+                
+                <h3 style="margin-top: 20px;"><i class="fas fa-users"></i> Equipo de Desarrollo</h3>
+                <div class="team">
+                    <div class="member">
+                        <div class="member-name">Nahun Jose Saldivar Zamora</div>
+                        <div class="member-role">Desarrollador</div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="member">
+                        <div class="member-name">Axel Rolando Núñez Enriquez</div>
+                        <div class="member-role">Desarrollador</div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="member">
+                        <div class="member-name">Steve Yunior Huaman Peña</div>
+                        <div class="member-role">Desarrollador</div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="member">
+                        <div class="member-name">Daniel Benjamin Quispirroca Benitez</div>
+                        <div class="member-role">Desarrollador</div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="card">
+            <h3><i class="fas fa-link"></i> Enlaces del Proyecto</h3>
+            <div class="links">
+                <a href="https://github.com/AxelNunezE/TraductorASL_GrupoWoody" class="btn" target="_blank">
+                    <i class="fab fa-github"></i> Repositorio GitHub
+                </a>
+                <a href="https://daniel318767.github.io/Traductor-de-Se-as---Infografia/" class="btn" target="_blank">
+                    <i class="fas fa-chart-bar"></i> Infografía
+                </a>
+            </div>
+        </section>
         
         <footer>
-            <p>Desarrollo de Algoritmos - Serie de Fibonacci</p>
+            <p>Proyecto desarrollado para la asignatura de Construcción de Software - Universidad Continental</p>
+            <p>© 2025 - Grupo Woody</p>
         </footer>
     </div>
 
     <script>
-        // Implementación iterativa
-        function fibonacciIterativo(n) {
-            if (n <= 1) return n;
+        // Crear efecto de código binario en el fondo
+        function createBinaryCode() {
+            const binaryBg = document.getElementById('binaryBg');
+            const characters = '01';
             
-            let a = 0, b = 1, temp;
-            for (let i = 2; i <= n; i++) {
-                temp = a + b;
-                a = b;
-                b = temp;
+            for (let i = 0; i < 50; i++) {
+                const binary = document.createElement('div');
+                binary.className = 'binary-code';
+                binary.textContent = Array(20).fill(0).map(() => 
+                    characters.charAt(Math.floor(Math.random() * characters.length))).join('');
+                
+                binary.style.left = Math.random() * 100 + 'vw';
+                binary.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                binary.style.animationDelay = Math.random() * 5 + 's';
+                
+                binaryBg.appendChild(binary);
             }
-            return b;
         }
         
-        // Implementación recursiva
-        function fibonacciRecursivo(n) {
-            if (n <= 1) return n;
-            return fibonacciRecursivo(n - 1) + fibonacciRecursivo(n - 2);
-        }
-        
-        // Calcular usando el método iterativo
-        function calculateIterative() {
-            const input = document.getElementById('iterative-input');
-            const resultDiv = document.getElementById('iterative-result');
-            
-            const n = parseInt(input.value);
-            if (isNaN(n) || n < 0) {
-                resultDiv.innerHTML = '<strong>Error:</strong> Por favor ingrese un número válido (≥ 0)';
-                return;
-            }
-            
-            if (n > 50) {
-                resultDiv.innerHTML = '<strong>Nota:</strong> Para valores grandes, el método iterativo es más eficiente';
-            }
-            
-            const startTime = performance.now();
-            const result = fibonacciIterativo(n);
-            const endTime = performance.now();
-            const timeTaken = (endTime - startTime).toFixed(4);
-            
-            resultDiv.innerHTML = `
-                <strong>F(${n}) = ${result}</strong><br>
-                <em>Tiempo de cálculo: ${timeTaken} milisegundos</em>
-            `;
-        }
-        
-        // Calcular usando el método recursivo
-        function calculateRecursive() {
-            const input = document.getElementById('recursive-input');
-            const resultDiv = document.getElementById('recursive-result');
-            
-            const n = parseInt(input.value);
-            if (isNaN(n) || n < 0) {
-                resultDiv.innerHTML = '<strong>Error:</strong> Por favor ingrese un número válido (≥ 0)';
-                return;
-            }
-            
-            if (n > 40) {
-                resultDiv.innerHTML = '<strong>Advertencia:</strong> Valores grandes pueden ralentizar el navegador';
-                // Demora intencional para que la interfaz no se congele
-                setTimeout(() => {
-                    const startTime = performance.now();
-                    const result = fibonacciRecursivo(n);
-                    const endTime = performance.now();
-                    const timeTaken = (endTime - startTime).toFixed(4);
-                    
-                    resultDiv.innerHTML = `
-                        <strong>F(${n}) = ${result}</strong><br>
-                        <em>Tiempo de cálculo: ${timeTaken} milisegundos</em>
-                    `;
-                }, 100);
-                return;
-            }
-            
-            const startTime = performance.now();
-            const result = fibonacciRecursivo(n);
-            const endTime = performance.now();
-            const timeTaken = (endTime - startTime).toFixed(4);
-            
-            resultDiv.innerHTML = `
-                <strong>F(${n}) = ${result}</strong><br>
-                <em>Tiempo de cálculo: ${timeTaken} milisegundos</em>
-            `;
-        }
-        
-        // Comparar el rendimiento de ambos métodos
-        function comparePerformance() {
-            const input = document.getElementById('compare-input');
-            const chart = document.getElementById('chart');
-            const resultDiv = document.getElementById('performance-result');
-            
-            const n = parseInt(input.value);
-            if (isNaN(n) || n < 0) {
-                resultDiv.innerHTML = '<strong>Error:</strong> Por favor ingrese un número válido (≥ 0)';
-                return;
-            }
-            
-            if (n > 40) {
-                resultDiv.innerHTML = '<strong>Advertencia:</strong> Valores grandes pueden ralentizar el navegador. El método recursivo será muy lento.';
-            }
-            
-            // Medir tiempo iterativo
-            const iterativeStart = performance.now();
-            const iterativeResult = fibonacciIterativo(n);
-            const iterativeEnd = performance.now();
-            const iterativeTime = iterativeEnd - iterativeStart;
-            
-            // Medir tiempo recursivo
-            const recursiveStart = performance.now();
-            const recursiveResult = fibonacciRecursivo(n);
-            const recursiveEnd = performance.now();
-            const recursiveTime = recursiveEnd - recursiveStart;
-            
-            // Actualizar gráfico
-            const maxBarHeight = 250;
-            const maxTime = Math.max(iterativeTime, recursiveTime);
-            const iterativeHeight = (iterativeTime / maxTime) * maxBarHeight;
-            const recursiveHeight = (recursiveTime / maxTime) * maxBarHeight;
-            
-            chart.innerHTML = `
-                <div class="bar bar-iterative" style="height: ${iterativeHeight}px;">
-                    <div class="bar-value">${iterativeTime.toFixed(4)}ms</div>
-                    <div class="bar-label">Iterativo</div>
-                </div>
-                <div class="bar bar-recursive" style="height: ${recursiveHeight}px;">
-                    <div class="bar-value">${recursiveTime.toFixed(4)}ms</div>
-                    <div class="bar-label">Recursivo</div>
-                </div>
-            `;
-            
-            // Mostrar resultados
-            resultDiv.innerHTML = `
-                <p><strong>Resultados para n = ${n}:</strong></p>
-                <p>Iterativo: F(${n}) = ${iterativeResult} | Tiempo: ${iterativeTime.toFixed(4)} ms</p>
-                <p>Recursivo: F(${n}) = ${recursiveResult} | Tiempo: ${recursiveTime.toFixed(4)} ms</p>
-                <p><strong>Diferencia:</strong> El método recursivo fue ${(recursiveTime/iterativeTime).toFixed(2)} veces más lento.</p>
-            `;
-        }
-        
-        // Calcular algunos valores al cargar la página
-        window.onload = function() {
-            calculateIterative();
-            calculateRecursive();
-        };
+        createBinaryCode();
     </script>
 </body>
 </html>
